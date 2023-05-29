@@ -4,8 +4,10 @@ import { renderComments } from './rendering.js';
 let appComments = [];
 export { appComments }
 
+const host = 'https://webdev-hw-api.vercel.app/api/v2/andrey-zibin/comments';
+
 export function getCommentsFromAPI() {
-  return fetch('https://webdev-hw-api.vercel.app/api/v1/andrey-zibin/comments', {
+  return fetch(host, {
     method: 'GET',
   })
     .then((response) => response.json())
@@ -37,7 +39,7 @@ export function sendCommentToServer(comment, addForm, loading, userName, textCom
   const userNameValue = userName.value;
   const textCommentValue = textComment.value;
 
-  return fetch('https://webdev-hw-api.vercel.app/api/v1/andrey-zibin/comments', {
+  return fetch(host, {
     method: 'POST',
     body: JSON.stringify(comment),
   })
