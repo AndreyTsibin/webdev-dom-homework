@@ -50,6 +50,9 @@ export function sendCommentToServer(comment, addForm, loading, userName, textCom
   return fetch(host, {
     method: 'POST',
     body: JSON.stringify(comment),
+    headers: {
+      Authorization: token,
+    }
   })
     .then((response) => {
       if (!response.ok) {
@@ -60,7 +63,6 @@ export function sendCommentToServer(comment, addForm, loading, userName, textCom
       }
       return response.json();
     })
-
     .then((responseData) => {
       if (addForm) {
         addForm.style.display = 'block';
@@ -92,6 +94,7 @@ export function sendCommentToServer(comment, addForm, loading, userName, textCom
       loading.style.display = 'none';
     });
 }
+
 
 
 
