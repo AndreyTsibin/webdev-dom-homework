@@ -1,14 +1,22 @@
 import { loading } from './main.js';
 import { renderComments } from './rendering.js';
+import { token } from './auth.js';
 
 let appComments = [];
 export { appComments }
 
-const host = 'https://webdev-hw-api.vercel.app/api/v2/andrey-zibin/comments';
+const host = 'https://wedev-api.sky.pro/api/v2/andrey-zibin/comments';
 
+
+export { host };
+
+//Получение данных
 export function getCommentsFromAPI() {
   return fetch(host, {
     method: 'GET',
+    headers: {
+      Authorization: token,
+    }
   })
     .then((response) => response.json())
     .then((responseData) => {
