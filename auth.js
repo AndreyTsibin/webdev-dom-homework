@@ -1,4 +1,3 @@
-import { getCommentsFromAPI } from './api.js';
 import { userName } from './main.js';
 
 const userHost = 'https://wedev-api.sky.pro/api/user/login';
@@ -77,7 +76,6 @@ export function loginValidation(login, password) {
       token = `Bearer ${newToken}`;
       userName.value = user.user.login;
       userName.disabled = true;
-      getCommentsFromAPI();
       return true; // Авторизация
     })
     .catch((error) => {
