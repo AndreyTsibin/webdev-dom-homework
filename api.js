@@ -1,12 +1,22 @@
 import { loading } from './main.js';
 import { renderComments } from './rendering.js';
+import { token } from './auth.js';
 
 let appComments = [];
 export { appComments }
 
+const host = 'https://wedev-api.sky.pro/api/v2/andrey-zibin/comments';
+
+
+export { host };
+
+//Получение данных
 export function getCommentsFromAPI() {
-  return fetch('https://webdev-hw-api.vercel.app/api/v1/andrey-zibin/comments', {
+  return fetch(host, {
     method: 'GET',
+    headers: {
+      Authorization: token,
+    }
   })
     .then((response) => response.json())
     .then((responseData) => {
@@ -37,9 +47,12 @@ export function sendCommentToServer(comment, addForm, loading, userName, textCom
   const userNameValue = userName.value;
   const textCommentValue = textComment.value;
 
-  return fetch('https://webdev-hw-api.vercel.app/api/v1/andrey-zibin/comments', {
+  return fetch(host, {
     method: 'POST',
     body: JSON.stringify(comment),
+    headers: {
+      Authorization: token,
+    }
   })
     .then((response) => {
       if (!response.ok) {
@@ -50,7 +63,6 @@ export function sendCommentToServer(comment, addForm, loading, userName, textCom
       }
       return response.json();
     })
-
     .then((responseData) => {
       if (addForm) {
         addForm.style.display = 'block';
@@ -82,6 +94,7 @@ export function sendCommentToServer(comment, addForm, loading, userName, textCom
       loading.style.display = 'none';
     });
 }
+
 
 
 

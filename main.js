@@ -66,6 +66,7 @@ const addComment = (userName, textComment) => {
     textComment.value = '';
     userName.value = '';
     button.setAttribute('disabled', '');
+    userName.disabled = false;
   }
 };
 
